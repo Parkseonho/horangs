@@ -1,3 +1,4 @@
+const { response } = require('express');
 const express = require('express')
 const app = express()
 const port = 3000
@@ -8,15 +9,21 @@ const con = mysql.createConnection({
     host: 'localhost',
     user: 'sbsst',
     password: 'sbs123414',
+    database: 'horang'
 });
 
 con.connect(function(err){
  if(err) throw err;
  console.log('Connected');
-})
 
-app.get('/', (req, res) => {
-  res.send('이게 무슨일!')
+});
+
+app.get('/', (request, response) => {
+    const sql = "select * from secretPost"
+    con.query(sql, function(err, result, fields){
+       if(err) throw err;
+       response.send(result)
+    });
 })
 
 app.listen(port, () => {
