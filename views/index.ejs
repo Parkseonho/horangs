@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>SecretPostList</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>No</th>
+            <th>제목</th>
+            <th>내용</th>
+            <th>작성일</th>
+            <th>조회수</th>
+            <th>수정</th>
+            <th>삭제</th>
+        </tr>
+        <% secretPost.forEach(function (value) { %>
+        <tr>
+            <td><%= value.id %></td>
+            <td><%= value.title %></td>
+            <td><%= value.content %></td>
+            <td><%= value.create_date %></td>
+            <td><%= value.views %></td>
+            <td><a href="/edit/<%= value.id %>">수정</a></td>
+            <td><a href="/delete/<%= value.id %>">삭제</a></td>
+        </tr>
+        <% }); %>
+    </table>
+</body>
+</html>
