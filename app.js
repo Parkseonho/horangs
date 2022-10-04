@@ -72,38 +72,20 @@ app.get('/delete/:id',(request, response)=>{
     if(err) throw err;
     console.log(result)
     response.redirect('/')
-  })
-})
+  });
+});
+
+/* 상세페이지 */
+app.get('/edit/:id',(request, response)=>{
+  const sql = "SELECT * FROM secretPost WHERE id = ?";
+
+  con.query(sql, [request.params.id], function(err, result, fields){
+    if(err) throw err;
+    response.render('edit',{user : result});
+  });
+});
 
 /* 정상실행 시 console 출력 */ 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
-
-/* 쿼리문 추가 Values.VER1
-const sqlV1 = "INSERT INTO secretPost(title, content) VALUES('오늘은 무슨날이죠?', '즐거운날..^^')"
-
-con.query(sqlV1, function(err, result, fields){
-  if (err) throw err;
-  console.log(result)
-})
-
-
-쿼리문 추가 Values?.VER2
-const sqlV2 = "INSERT INTO secretPost(title, content) VALUES(?,?)"
-
-con.query(sqlV2, ['HiByeMaMa','이 드라마 재미있음'], function(err, result, fields){
-  if (err) throw err;
-  console.log(result)
-})
-
-쿼리문 추가 SET?.VER 
-
-const sqlSet = "INSERT INTO secretPost SET ?"
-
-con.query(sqlSet, {title:'정직한후보2',content:'재미있는듯'}, function(err, result, fields){
-  if(err) throw err;
-  console.log(result)
-});
-
-*/
