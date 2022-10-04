@@ -20,12 +20,13 @@
             <td><%= value.id %></td>
             <td><%= value.title %></td>
             <td><%= value.content %></td>
-            <td><%= value.create_date %></td>
+            <td><%= moment(value.create_date).format('YY-M-D') %></td>
             <td><%= value.views %></td>
             <td><a href="/edit/<%= value.id %>">수정</a></td>
             <td><a href="/delete/<%= value.id %>">삭제</a></td>
         </tr>
         <% }); %>
     </table>
+    <a href="/create" class="no-underline"> 생성 </a>
 </body>
 </html>
