@@ -2,9 +2,9 @@ const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
 const ejs = require('ejs')
+const moment = require('moment')
 const app = express()
 const port = 3000
-
 const mysql = require('mysql');
 
 const con = mysql.createConnection({
@@ -36,25 +36,44 @@ app.get('/', (request, response) => {
 })
 */
 
-/* html문 가져오기 */
+/* list */
 app.get('/', (request, response) => {
  const sql = "select * from secretPost";
  con.query(sql, function(err, result, fields){
   if(err) throw err;
-  response.render('index',{secretPost:result})
+  response.render('index',{
+  secretPost:result,
+  moment
+  });
  });
 });
 
+/* html문 가져오기 */
+app.get('/create', (request, response) => {
+  response.sendFile(path.join(__dirname,'html/form.html'))
+});
+
 /* html문 보내기 */
-app.post('/', (request, response) => {
+app.post('/create', (request, response) => {
   const sqlInsert = "INSERT INTO secretPost SET ?"
 
   con.query(sqlInsert, request.body, function(err, result, fields){
     if(err) throw err;
     console.log(result);
-    response.send('등록 완료');
+    response.redirect('/');
   });
 });
+
+/* 삭제 */
+app.get('/delete/:id',(request, response)=>{
+  const sql = "DELETE FROM secretPost WHERE id = ?";
+
+  con.query(sql, [request.params.id], function(err, result, fields){
+    if(err) throw err;
+    console.log(result)
+    response.redirect('/')
+  })
+})
 
 /* 정상실행 시 console 출력 */ 
 app.listen(port, () => {
