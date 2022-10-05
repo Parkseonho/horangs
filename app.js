@@ -81,9 +81,23 @@ app.get('/edit/:id',(request, response)=>{
 
   con.query(sql, [request.params.id], function(err, result, fields){
     if(err) throw err;
-    response.render('edit',{user : result});
+    response.render('edit',{secretPost : result});
   });
 });
+
+
+/* 업데이트 */
+app.post('/update/:id',(request, response)=>{
+  const sql = "UPDATE secretPost SET ? WHERE id = "+request.params.id;
+
+  con.query(sql, request.body, function(err, result, fields){
+    if(err) throw err;
+    console.log(result);
+    response.redirect('/');
+  });
+});
+
+
 
 /* 정상실행 시 console 출력 */ 
 app.listen(port, () => {
