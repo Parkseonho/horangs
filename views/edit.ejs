@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>업데이트</title>
+
+</head>
+
+<body>
+    <h1>업데이트</h1>
+    <form action="/update/<%= secretPost[0].id %>" method="POST">
+        제목 <input type="text" name="title" value="<%= secretPost[0].title %>"><br>
+        내용 <input type="text" name="content" value="<%= secretPost[0].content %>" width="30" height="50"><br>
+        <button type="submit">업데이트</button>
+    </form>
+</body>
+
+</html>
