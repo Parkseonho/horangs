@@ -48,12 +48,12 @@ app.get('/', (request, response) => {
  });
 });
 
-/* html문 가져오기 */
+/* 가져오기 */
 app.get('/create', (request, response) => {
-  response.sendFile(path.join(__dirname,'html/form.html'))
+  response.render('form');
 });
 
-/* html문 보내기 */
+/* 보내기 */
 app.post('/create', (request, response) => {
   const sqlInsert = "INSERT INTO secretPost SET ?"
 
