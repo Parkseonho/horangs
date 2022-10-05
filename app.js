@@ -72,10 +72,11 @@ app.get('/delete/:id',(request, response)=>{
     if(err) throw err;
     console.log(result)
     response.redirect('/')
+
   });
 });
 
-/* 상세페이지 */
+/* 업데이트 */
 app.get('/edit/:id',(request, response)=>{
   const sql = "SELECT * FROM secretPost WHERE id = ?";
 
